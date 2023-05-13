@@ -7,25 +7,24 @@
         style="float: right"
         type="primary"
         @click="dialogFormVisible = true; dept={}"
-      >+ 新增班级</el-button
-      >
+      >+ 新增班级</el-button>
     </el-row>
     <br>
     <!-- 数据表格 -->
     <template>
       <el-table
-        highlight-current-row
         ref="multipleTable"
+        highlight-current-row
         :data="tableData"
         tooltip-effect="dark"
         style="width: 100%"
         border
       >
-        <el-table-column type="index" width="100" label="序号" header-align="center" align="center"> </el-table-column>
-        <el-table-column prop="name" label="班级名称" header-align="center" align="center"></el-table-column>
+        <el-table-column type="index" width="100" label="序号" header-align="center" align="center" />
+        <el-table-column prop="name" label="班级名称" header-align="center" align="center" />
         <el-table-column label="最后操作时间" header-align="center" align="center">
           <template slot-scope="scope">
-            {{scope.row.updateTime ? scope.row.updateTime.replace('T',' '):''}}
+            {{ scope.row.updateTime ? scope.row.updateTime.replace('T',' '):'' }}
           </template>
         </el-table-column>
 
@@ -36,16 +35,14 @@
               type="primary"
               plain
               @click="selectById(scope.row.id)"
-            >编辑</el-button
-            >
+            >编辑</el-button>
 
             <el-button
               size="mini"
               type="danger"
               plain
               @click="deleteById(scope.row.id)"
-            >删除</el-button
-            >
+            >删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -53,10 +50,10 @@
 
     <!-- 新建对话框 -->
 
-    <el-dialog title="保存班级" :visible.sync="dialogFormVisible" >
+    <el-dialog title="保存班级" :visible.sync="dialogFormVisible">
       <el-form :model="dept">
         <el-form-item label="班级名称" :label-width="formLabelWidth">
-          <el-input v-model="dept.name"  placeholder="请输入班级名称" autocomplete="off"></el-input>
+          <el-input v-model="dept.name" placeholder="请输入班级名称" autocomplete="off" />
         </el-form-item>
       </el-form>
 
@@ -69,97 +66,97 @@
 </template>
 
 <script>
-import { findAll, add, update, deleteById, selectById } from "@/api/classes.js";
+import { findAll, add, update, deleteById, selectById } from '@/api/classes.js'
 
 export default {
   data() {
     return {
-      formLabelWidth: "120px",
-      dialogFormVisible: false, //控制对话框是否可见
+      formLabelWidth: '120px',
+      dialogFormVisible: false, // 控制对话框是否可见
       dept: {
-        name: "",
+        name: ''
       },
-      tableData: [],
-    };
+      tableData: []
+    }
+  },
+  mounted() {
+    // 当页面加载完成后自动执行。
+    this.init()
   },
 
   methods: {
 
-    //删除班级
+    // 删除班级
     deleteById(id) {
-      this.$confirm("确认删除?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
+      this.$confirm('确认删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       }).then(() => {
         deleteById(id).then((result) => {
-          if(result.data.code == 1){
+          if (result.data.code === 1) {
             this.$message({
-              message: "恭喜你，删除成功",
-              type: "success",
-            });
-          }else{
-            this.$message.error(result.data.msg);
+              message: '恭喜你，删除成功',
+              type: 'success'
+            })
+          } else {
+            this.$message.error(result.data.msg)
           }
-          //重新查询数据
-          this.init();
-        });
+          // 重新查询数据
+          this.init()
+        })
       }).catch(() => {
         this.$message({
-          type: "info",
-          message: "已取消删除",
-        });
-      });
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
 
-    //根据ID查询班级 -- 回显
+    // 根据ID查询班级 -- 回显
     selectById(id) {
-      this.dialogFormVisible = true;
+      this.dialogFormVisible = true
       selectById(id).then((result) => {
-        this.dept = result.data.data;
-      });
+        this.dept = result.data.data
+      })
     },
 
-    //保存方法
+    // 保存方法
     add() {
-      let method ;// 添加
+      let method // 添加
       if (this.dept.id) {
-        method = update(this.dept); // 修改
-      }else{
-        method = add(this.dept); //添加
+        method = update(this.dept) // 修改
+      } else {
+        method = add(this.dept) // 添加
       }
       method.then((result) => {
-        if (result.data.code == 1) {
-          //修改成功
-          this.$message.success("恭喜你，保存成功");
-          //重新查询数据
-          this.init();
+        if (result.data.code === 1) {
+          // 修改成功
+          this.$message.success('恭喜你，保存成功')
+          // 重新查询数据
+          this.init()
         } else {
-          this.$message.error(result.data.msg);
+          this.$message.error(result.data.msg)
         }
-      });
+      })
       // 关闭新建窗口
-      this.dialogFormVisible = false;
+      this.dialogFormVisible = false
 
       // 清空模型数据
-      this.dept = {};
+      this.dept = {}
     },
 
-    //初始化 - 查询全部
+    // 初始化 - 查询全部
     init() {
       findAll().then((result) => {
-        console.log(result);
-        if (result.data.code == 1) {
-          this.tableData = result.data.data;
+        console.log(result)
+        if (result.data.code === 1) {
+          this.tableData = result.data.data
         }
-      });
-    },
-  },
-  mounted() {
-    //当页面加载完成后自动执行。
-    this.init();
-  },
-};
+      })
+    }
+  }
+}
 </script>
 <style>
 

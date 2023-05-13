@@ -54,8 +54,7 @@ import { setToken } from '@/utils/auth'
 export default {
   name: 'Login',
   data() {
-
-    //用户名校验规则
+    // 用户名校验规则
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
         callback(new Error('请输入正确的用户名'))
@@ -64,7 +63,7 @@ export default {
       }
     }
 
-    //用户名校验规则
+    // 用户名校验规则
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
         callback(new Error('密码长度至少为6位'))
@@ -73,7 +72,7 @@ export default {
       }
     }
 
-    //数据模型
+    // 数据模型
     return {
       loginForm: {
         username: 'jinyong',
@@ -90,7 +89,7 @@ export default {
   },
 
   methods: {
-    //展示密码
+    // 展示密码
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -101,25 +100,25 @@ export default {
         this.$refs.password.focus()
       })
     },
-    
-    //登录方法
+
+    // 登录方法
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          
-          //调用登录后端接口
+
+          // 调用登录后端接口
           login(this.loginForm).then((result) => {
             console.log(result)
             if (result.data.code == 1) {
-              setToken(result.data.data);
-              console.log('login success');
-              this.$router.push('/');
+              setToken(result.data.data)
+              console.log('login success')
+              this.$router.push('/')
             } else {
-              this.$message.error(result.data.msg);
+              this.$message.error(result.data.msg)
               this.loading = false
             }
-          });
+          })
         } else {
           console.log('error submit!!')
           return false

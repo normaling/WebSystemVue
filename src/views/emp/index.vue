@@ -325,7 +325,7 @@ export default {
       // 2. 发送请求
 
       selectById(id).then((result) => {
-        if (result.data.code == 1) {
+        if (result.data.code === 1) {
           this.emp = result.data.data
           this.emp
         }
@@ -354,7 +354,7 @@ export default {
       }).then(() => {
         // 2. 发送AJAX请求
         deleteById(id).then((resp) => {
-          if (resp.data.code == 1) {
+          if (resp.data.code === 1) {
             // 删除成功
             this.$message.success('恭喜你，删除成功')
             this.page()
@@ -384,7 +384,7 @@ export default {
 
         // 2. 发送AJAX请求
         deleteById(this.selectedIds).then((resp) => {
-          if (resp.data.code == '1') {
+          if (resp.data.code === '1') {
             // 删除成功
             this.$message.success('恭喜你，删除成功')
             this.page()
