@@ -126,7 +126,7 @@ export default {
       if (this.dept.id) {
         method = update(this.dept); // 修改
       }else{
-        method = add(this.dept); //添加 
+        method = add(this.dept); //添加
       }
       method.then((result) => {
         if (result.data.code == 1) {
