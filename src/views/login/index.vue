@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">黑马程序员Tlias智能学习辅助系统</h3>
+        <h3 class="title">Tlias智能学习辅助系统</h3>
       </div>
 
       <el-form-item prop="username">
@@ -75,7 +75,7 @@ export default {
     // 数据模型
     return {
       loginForm: {
-        username: 'jinyong',
+        username: 'root',
         password: '123456'
       },
       loginRules: {
@@ -110,10 +110,10 @@ export default {
           // 调用登录后端接口
           login(this.loginForm).then((result) => {
             console.log(result)
-            if (result.data.code == 1) {
+            if (result.data.code === 1) {
               setToken(result.data.data)
               console.log('login success')
-              this.$router.push('/')
+              this.$router.push('/dashboard')
             } else {
               this.$message.error(result.data.msg)
               this.loading = false

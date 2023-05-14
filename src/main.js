@@ -10,8 +10,10 @@ import store from './store'
 import router from './router'
 
 import '@/icons' // icon
-// import '@/permission'
 
+import * as echarts from 'echarts';
+Vue.prototype.$echarts = echarts
+// import '@/permission'
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
@@ -19,7 +21,6 @@ if (process.env.NODE_ENV === 'production') {
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
-
 new Vue({
   el: '#app',
   router,

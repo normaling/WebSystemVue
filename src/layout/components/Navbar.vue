@@ -7,16 +7,16 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img src="https://www.itheima.com/images/logo.png" class="user-avatar">
+          <!--          <img src="" class="user-avatar">-->
+          选项
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <router-link to="/">
+          <router-link to="/dashboard">
             <el-dropdown-item>
               首页
             </el-dropdown-item>
           </router-link>
-
 
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">退出</span>
@@ -32,7 +32,6 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import { removeToken } from '@/utils/auth'
-
 
 export default {
   components: {
@@ -50,7 +49,7 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      removeToken();
+      removeToken()
       this.$router.push('/login')
     }
   }
