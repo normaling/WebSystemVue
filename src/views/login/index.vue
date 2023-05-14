@@ -113,7 +113,7 @@ export default {
             if (result.data.code === 1) {
               setToken(result.data.data)
               console.log('login success')
-              this.$router.push('/dashboard')
+              this.$router.push('/')
             } else {
               this.$message.error(result.data.msg)
               this.loading = false
