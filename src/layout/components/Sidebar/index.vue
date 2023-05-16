@@ -43,8 +43,7 @@ export default {
       return path
     },
     showLogo() {
-     
-      return true;
+      return true
     },
     variables() {
       return variables

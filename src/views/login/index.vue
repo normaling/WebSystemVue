@@ -75,7 +75,7 @@ export default {
     // 数据模型
     return {
       loginForm: {
-        username: 'root',
+        username: 'jinyong',
         password: '123456'
       },
       loginRules: {

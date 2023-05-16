@@ -292,7 +292,7 @@ export default {
 
     clear() {
       this.searchEmp = { name: '', gender: '' }
-      this.beginTime = '',
+      this.beginTime = ''
       this.endTime = ''
       this.entrydate = ''
       this.page()

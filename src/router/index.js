@@ -72,8 +72,6 @@ export const constantRoutes = [
       }
     ]
   },
-
-
   {
     path: '/report',
     component: Layout,
@@ -95,8 +93,17 @@ export const constantRoutes = [
       }
     ]
   },
-
-
+  {
+    path: '/map',
+    component: Layout,
+    redirect: '/map',
+    children: [{
+      path: 'map',
+      name: 'Map',
+      component: () => import('@/views/map/index'),
+      meta: { title: '地图', icon: 'el-icon-s-data' }
+    }]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
